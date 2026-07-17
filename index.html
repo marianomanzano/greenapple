@@ -88,11 +88,15 @@ arcgis-map {
     zoom="9"
     center="-98.1637,26.3017">
 
-    <!-- <arcgis-zoom slot="top-left"></arcgis-zoom> -->
+    <arcgis-home slot="top-left"></arcgis-home>
 
-    <!-- <arcgis-legend slot="bottom-right"></arcgis-legend> -->
+    <arcgis-zoom slot="top-left"></arcgis-zoom>
 
-    <!-- <arcgis-search slot="top-right"></arcgis-search> -->
+    <arcgis-locate slot="top-left"></arcgis-locate>
+
+    <arcgis-compass slot="top-left"></arcgis-compass>
+    <arcgis-scale-bar slot="bottom-center"
+                  unit="dual"></arcgis-scale-bar>
 
   </arcgis-map>
 
@@ -188,60 +192,9 @@ opacity: .80,
     // Wait until the map is ready
     await mapElement.viewOnReady();
 
-    // Import navigation widgets
-const Home = await $arcgis.import(
-  "@arcgis/core/widgets/Home.js"
-);
-
-const Locate = await $arcgis.import(
-  "@arcgis/core/widgets/Locate.js"
-);
-
-const Zoom = await $arcgis.import(
-  "@arcgis/core/widgets/Zoom.js"
-);
-
-const Compass = await $arcgis.import(
-  "@arcgis/core/widgets/Compass.js"
-);
-
-
-// Home button
-const homeWidget = new Home({
-  view: mapElement.view
-});
-
-
-// Locate button
-const locateWidget = new Locate({
-  view: mapElement.view
-});
-
-
-// Zoom in/out buttons
-const zoomWidget = new Zoom({
-  view: mapElement.view
-});
-
-
-// Compass button
-const compassWidget = new Compass({
-  view: mapElement.view
-});
-
 const legend = new Legend({
   view: mapElement.view
 });
-
-
-// Add widgets to the map UI
-mapElement.view.ui.add(homeWidget, "top-left");
-
-mapElement.view.ui.add(locateWidget, "top-left");
-
-mapElement.view.ui.add(zoomWidget, "top-left");
-
-mapElement.view.ui.add(compassWidget, "top-left");
 
     // Create the Census layer
     const censusLayer = new FeatureLayer({
@@ -408,10 +361,7 @@ const legendExpand = new Expand({
 });
 
 // Add the Search widget to the map
-mapElement.view.ui.add(homeWidget, "top-left");
-mapElement.view.ui.add(zoomWidget, "top-left");
-mapElement.view.ui.add(locateWidget, "top-left");
-mapElement.view.ui.add(compassWidget, "top-left");
+
 
 mapElement.view.ui.add(searchWidget, "top-right");
 
